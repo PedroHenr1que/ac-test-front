@@ -1,0 +1,10 @@
+<app-empresa-form></app-empresa-form>
+
+<ag-grid-angular
+  class="ag-theme-alpine"
+  style="width: 100%; height: 500px;"
+  [rowData]="empresas"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  (cellValueChanged)="onCellValueChanged($event)">
+</ag-grid-angular>

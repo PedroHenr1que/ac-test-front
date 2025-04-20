@@ -1,0 +1,10 @@
+<app-fornecedor-form></app-fornecedor-form>
+
+<ag-grid-angular
+  class="ag-theme-alpine"
+  style="width: 100%; height: 500px;"
+  [rowData]="fornecedores"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  (cellValueChanged)="onCellValueChanged($event)">
+</ag-grid-angular>

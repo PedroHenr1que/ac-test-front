@@ -1,0 +1,24 @@
+<button (click)="openCloseForm()">Form</button>
+
+<form *ngIf="isFormVisible" #linkForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="empresa">Empresa:</label>
+      <select name="empresa" [(ngModel)]="selectedEmpresaId" required>
+        <option *ngFor="let empresa of empresas" [value]="empresa.id">
+          {{ empresa.nomeFantasia }}
+        </option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="fornecedor">Fornecedor:</label>
+      <select name="fornecedor" [(ngModel)]="selectedFornecedorId" required>
+        <option *ngFor="let fornecedor of fornecedores" [value]="fornecedor.id">
+          {{ fornecedor.nome }}
+        </option>
+      </select>
+    </div>
+  
+    <button type="submit" [disabled]="!linkForm.valid">Vincular</button>
+  </form>
+  

@@ -1,0 +1,38 @@
+<button (click)="openCloseForm()">Form</button>
+
+<form *ngIf="isFormVisible" [formGroup]="empresaForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="cnpj">CNPJ:</label>
+    <input id="cnpj" type="text" formControlName="cnpj" />
+    <div *ngIf="empresaForm.get('cnpj')?.invalid && empresaForm.get('cnpj')?.touched">
+      <small>CNPJ é obrigatório e deve ter ao menos 14 caracteres.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="cep">CEP:</label>
+    <input id="cep" type="text" formControlName="cep" />
+  
+    <div *ngIf="empresaForm.get('cep')?.errors?.['cepInvalido']">
+      <small>CEP inválido (precisa ter 8 dígitos).</small> 
+    </div>
+  
+    <div *ngIf="empresaForm.get('cep')?.errors?.['cepNaoEncontrado']">
+      <small>CEP não encontrado.</small> 
+    </div>
+  
+    <div *ngIf="empresaForm.get('cep')?.errors?.['erroApi']">
+      <small>Erro ao consultar API do CEP.</small> 
+    </div>
+  </div>
+
+  <div>
+    <label for="nomeFantasia">Nome Fantasia:</label>
+    <input id="nomeFantasia" type="text" formControlName="nomeFantasia" />
+    <div *ngIf="empresaForm.get('nomeFantasia')?.invalid && empresaForm.get('nomeFantasia')?.touched">
+      <small>Nome Fantasia é obrigatório.</small>
+    </div>
+  </div>
+
+  <button type="submit">Salvar</button>
+</form>

@@ -1,0 +1,74 @@
+<button (click)="openCloseForm()">Form</button>
+
+<form *ngIf="isFormVisible" [formGroup]="fornecedorForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nome">Nome:</label>
+    <input id="nome" type="text" formControlName="nome" />
+    <div *ngIf="fornecedorForm.get('nome')?.invalid && fornecedorForm.get('nome')?.touched">
+      <small>Nome é obrigatório.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" />
+    <div *ngIf="fornecedorForm.get('email')?.invalid && fornecedorForm.get('email')?.touched">
+      <small>Email é obrigatório e deve ser válido.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="cep">CEP:</label>
+    <input id="cep" type="text" formControlName="cep" />
+  
+    <div *ngIf="fornecedorForm.get('cep')?.errors?.['cepInvalido']">
+      <small>CEP inválido (precisa ter 8 dígitos).</small> 
+    </div>
+  
+    <div *ngIf="fornecedorForm.get('cep')?.errors?.['cepNaoEncontrado']">
+      <small>CEP não encontrado.</small> 
+    </div>
+  
+    <div *ngIf="fornecedorForm.get('cep')?.errors?.['erroApi']">
+      <small>Erro ao consultar API do CEP.</small> 
+    </div>
+  </div>
+  
+
+  <div>
+    <label for="tipo">Tipo:</label>
+    <select id="tipo" formControlName="tipo">
+      <option value="FISICA">Física</option>
+      <option value="JURIDICA">Jurídica</option>
+    </select>
+    <div *ngIf="fornecedorForm.get('tipo')?.invalid && fornecedorForm.get('tipo')?.touched">
+      <small>Tipo é obrigatório.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="documento">Documento:</label>
+    <input id="documento" type="text" formControlName="documento" />
+    <div *ngIf="fornecedorForm.get('documento')?.invalid && fornecedorForm.get('documento')?.touched">
+      <small>Documento é obrigatório e deve ter até 14 caracteres.</small>
+    </div>
+  </div>
+
+  <div *ngIf="isPessoaFisica()">
+    <label for="rg">RG:</label>
+    <input id="rg" type="text" formControlName="rg" />
+    <div *ngIf="fornecedorForm.get('rg')?.invalid && fornecedorForm.get('rg')?.touched">
+      <small>RG deve ter 7 caracteres.</small>
+    </div>
+  </div>
+
+  <div *ngIf="isPessoaFisica()">
+    <label for="dataNascimento">Data de Nascimento:</label>
+    <input id="dataNascimento" type="date" formControlName="dataNascimento" />
+    <div *ngIf="fornecedorForm.get('dataNascimento')?.invalid && fornecedorForm.get('dataNascimento')?.touched">
+      <small>Data de nascimento é obrigatória para pessoa física.</small>
+    </div>
+  </div>
+
+  <button type="submit">Salvar</button>
+</form>
