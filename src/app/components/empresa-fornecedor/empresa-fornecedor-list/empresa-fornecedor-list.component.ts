@@ -53,7 +53,7 @@ export class EmpresaFornecedorListComponent implements OnInit {
   loadEmpresaFornecedor() {
     this.empresaFornecedorService.getAll().subscribe({
       next: (res) => this.empresasFornecedores = res,
-      error: (err) => console.error(err)
+      error: err => alert(err.error)
     });
   }
 
@@ -62,10 +62,7 @@ export class EmpresaFornecedorListComponent implements OnInit {
       next: () => {
         this.loadEmpresaFornecedor();
       },
-      error: err => {
-        console.error('Erro ao deletar empresa-fornecedor:', err);
-        alert('Erro ao deletar empresa-fornecedor!');
-      }
+      error: err => alert(err.error)
     });
   }
 }

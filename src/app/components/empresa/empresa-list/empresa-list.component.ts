@@ -50,7 +50,7 @@ export class EmpresaListComponent implements OnInit {
   loadEmpresas() {
     this.empresaService.getAll().subscribe({
       next: (res) => this.empresas = res,
-      error: (err) => console.error('Erro ao carregar fornecedores:', err)
+      error: err => alert(err.error)
     });
   }
 
@@ -58,25 +58,15 @@ export class EmpresaListComponent implements OnInit {
     const updatedData = event.data;
   
     this.empresaService.update(updatedData).subscribe({
-      next: () => {
-        console.log('Empresa atualizado com sucesso!');
-      },
-      error: (err) => {
-        console.error('Erro ao atualizar empresa:', err);
-        alert('Erro ao atualizar empresa!');
-      }
+      next: () => {},
+      error: err => alert(err.error)
     });
   }
   
   deleteEmpresa(empresa: any) {
     this.empresaService.delete(empresa.id).subscribe({
-      next: () => {
-        this.loadEmpresas();
-      },
-      error: err => {
-        console.error('Erro ao deletar empresa:', err);
-        alert('Erro ao deletar empresa!');
-      }
+      next: () => this.loadEmpresas(),
+      error: err => alert(err.error)
     });
   }
 }

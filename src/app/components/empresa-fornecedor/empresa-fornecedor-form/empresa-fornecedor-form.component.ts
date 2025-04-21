@@ -32,11 +32,11 @@ export class EmpresaFornecedorFormComponent implements OnInit{
   ngOnInit(): void {
     this.empresaService.getAll().subscribe({
       next: (res) => this.empresas = res,
-      error: (err) => console.error('Erro ao carregar fornecedores:', err)
+      error: err => alert(err.error)
     });
     this.fornecedorService.getAll().subscribe({
       next: (res) => this.fornecedores = res,
-      error: (err) => console.error('Erro ao carregar fornecedores:', err)
+      error: err => alert(err.error)
     });
   }
 
@@ -47,8 +47,7 @@ export class EmpresaFornecedorFormComponent implements OnInit{
   onSubmit() {
     this.empresaFornecedorService.save(this.selectedEmpresaId, this.selectedFornecedorId).subscribe({
       next: (res) => this.empresaFornecedorService.empresaFornecedorUpdateSource.next(true),
-      error: (err) => console.log(err)
-      
+      error: err => alert(err.error)
     })
   }
 }

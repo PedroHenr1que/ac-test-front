@@ -43,7 +43,7 @@ export class FornecedorFormComponent {
       const fornecedorData = this.fornecedorForm.value;
       this.fornecedorService.create(fornecedorData).subscribe({
         next: (res) => this.fornecedorService.fornecedorUpdateSource.next(true),
-        
+        error: err => alert(err.error)
       })
     } else {
       this.fornecedorForm.markAllAsTouched();

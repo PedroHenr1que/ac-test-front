@@ -73,7 +73,7 @@ export class FornecedorListComponent implements OnInit {
   loadFornecedores() {
     this.fornecedorService.getAll().subscribe({
       next: (res) => this.fornecedores = res,
-      error: (err) => console.error('Erro ao carregar fornecedores:', err)
+      error: err => alert(err.error)
     });
   }
 
@@ -82,10 +82,7 @@ export class FornecedorListComponent implements OnInit {
       next: () => {
         this.loadFornecedores();
       },
-      error: err => {
-        console.error('Erro ao deletar fornecedor:', err);
-        alert('Erro ao deletar fornecedor!');
-      }
+      error: err => alert(err.error)
     });
   }
 
@@ -93,13 +90,8 @@ export class FornecedorListComponent implements OnInit {
     const updatedData = event.data;
 
     this.fornecedorService.update(updatedData).subscribe({
-      next: () => {
-        console.log('Fornecedor atualizado com sucesso!');
-      },
-      error: (err) => {
-        console.error('Erro ao atualizar Fornecedor:', err);
-        alert('Erro ao atualizar Fornecedor!');
-      }
+      next: () => {},
+      error: err => alert(err.error)
     });
   }
 

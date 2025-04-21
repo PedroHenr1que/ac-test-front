@@ -33,7 +33,7 @@ export class EmpresaFormComponent {
       console.log('Empresa:', this.empresaForm.value);
       this.empresaService.create(this.empresaForm.value).subscribe({
         next: (res) => this.empresaService.empresaUpdateSource.next(true),
-
+        error: err => alert(err.error)
       });
     } else {
       this.empresaForm.markAllAsTouched();
